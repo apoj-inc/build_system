@@ -12,8 +12,12 @@ while len(paths_list) != paths_list_len:
 
     while path_id < paths_list_len:
         submodules = []
-        with open(f"{paths_list[path_id]}/{submodule_suffix}", "r") as f:
-            submodules = f.read().splitlines()
+
+        filepath = f"{paths_list[path_id]}/{submodule_suffix}"
+        
+        if os.path.isfile(filepath):
+            with open(filepath, "r") as f:
+                submodules = f.read().splitlines()
         
         paths_list += submodules
 
