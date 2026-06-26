@@ -108,7 +108,7 @@ $(RELEASE_FILES):\
 	@echo set TOPLEVEL $(notdir $(basename $@)) > $(RELEASE_VARS_TCL)
 	@echo set RTL_FILES {$(foreach file,$(shell cat $(abspath $(dir $@)sources.lst) | grep -v "#"), src/$(notdir $(file))) } >> $(RELEASE_VARS_TCL)
 	@echo set INCDIR inc >> $(RELEASE_VARS_TCL)
-	@echo set DEVICE_FAMILY $(DEVICE_FAMILY) >> $(RELEASE_VARS_TCL)
+	@echo set DEVICE_FAMILY {$(DEVICE_FAMILY)} >> $(RELEASE_VARS_TCL)
 	@echo set DEVICE_PART $(DEVICE_PART) >> $(RELEASE_VARS_TCL)
 
 	@cd $(dir $@)package;\
