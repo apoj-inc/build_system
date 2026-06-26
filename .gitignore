@@ -23,3 +23,4 @@ autotest/*
 !autotest/pytest.ini 
 !autotest/requirements.txt 
 !autotest/test_cocotb_wrapper.py
+!autotest/configure
