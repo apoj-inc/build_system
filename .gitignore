@@ -17,3 +17,9 @@ questa/*
 
 utils/*
 !utils/collect_lists.py
+
+autotest/*
+!autotest/makefile 
+!autotest/pytest.ini 
+!autotest/requirements.txt 
+!autotest/test_cocotb_wrapper.py
