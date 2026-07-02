@@ -26,7 +26,7 @@ endif
 
 ifndef SIM_ARGS
 SIM_ARGS :=
-SIM_ARGS += -suppress 12110 -autofindloop -suppress 12130
+SIM_ARGS += -suppress 12110 -autofindloop -suppress 12130 -sv_seed random
 SIM_ARGS += -do $(CURDIR)/build_system/cctb/questa_after_vsim.do
 endif
 

@@ -55,7 +55,7 @@ close $fp
 vlib work
 vlog -mfcu +incdir${INCDIRS_STRING} -f files_rtl.lst -suppress 13314
 
-vsim -voptargs=+acc work.$TOPLEVEL +define+QUESTA
+vsim -voptargs=+acc work.$TOPLEVEL +define+QUESTA -sv_seed random
 if {[lsearch -exact $WildcardFilter Memory] >= 0} {
     set WildcardFilter [lsearch -not -all -inline $WildcardFilter Memory]
 }
