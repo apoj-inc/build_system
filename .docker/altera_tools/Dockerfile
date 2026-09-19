@@ -7,7 +7,7 @@ WORKDIR $MAIN
 RUN apt-get update && apt install wget libxext-dev libxft2 build-essential python3.10 python3.10-venv libpython3.10 -y\
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://downloads.intel.com/akdlm/software/acdsinst/24.1std/1077/ib_installers/QuestaSetup-24.1std.0.1077-linux.run 2> /dev/null;\
+RUN wget https://downloads.intel.com/akdlm/software/acdsinst/24.1std/1077/ib_installers/QuestaSetup-24.1std.0.1077-linux.run;\
     chmod +x ./QuestaSetup-24.1std.0.1077-linux.run;\
     ./QuestaSetup-24.1std.0.1077-linux.run --accept_eula 1 --mode unattended --installdir /home/altera/24.1std;\
     rm QuestaSetup-24.1std.0.1077-linux.run;
@@ -32,7 +32,7 @@ FROM build AS production
 RUN apt update && apt install libglib2.0-dev -y\
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://downloads.intel.com/akdlm/software/acdsinst/25.1std/1129/qinst/qinst-lite-linux-25.1std-1129.run 2> /dev/null;\
+RUN wget https://downloads.intel.com/akdlm/software/acdsinst/25.1std/1129/qinst/qinst-lite-linux-25.1std-1129.run;\
     chmod +x ./qinst-lite-linux-25.1std-1129.run;\
     ./qinst-lite-linux-25.1std-1129.run\
     quinst --cli --accept-eula --delete-downloads\
