@@ -27,7 +27,8 @@ lst_suffixes = ["rtl/lists/files_hex.lst",
                 "rtl/lists/files_rtl.lst",
                 "rtl/lists/incdirs.lst",
                 "fpga/quartus/qsys/lists/names_qsys.lst",
-                "fpga/quartus/custom_ip/lists/ip_paths.lst"]
+                "fpga/quartus/custom_ip/lists/ip_paths.lst",
+                "fpga/vivado/lists/files_xci.lst"]
 
 full_lsts = [[] for _ in range(len(lst_suffixes))]
 
@@ -35,7 +36,8 @@ lst_names = ["files_hex.lst",
              "files_rtl.lst",
              "incdirs.lst",
              "names_qsys.lst",
-             "ip_paths.lst"]
+             "ip_paths.lst",
+             "files_xci.lst"]
 
 for path in paths_list:
     for i, lst_suffix in enumerate(lst_suffixes):
