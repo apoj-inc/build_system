@@ -44,7 +44,7 @@ run_pytest: $(VENV_DIR)/bin/activate
 	export BUILD_ARGS="$(BUILD_ARGS)"; \
 	export SIM_ARGS="$(SIM_ARGS)"; \
 	source $(VENV_DIR)/bin/activate; \
-	python3 -m pytest --junit-xml=${RESULTS_DIR}/all.xml $(ARGS)
+	python3 -m pytest --junit-xml=${RESULTS_DIR}/all.xml $(ARGS) build_system/autotest/test_cocotb_wrapper.py
 
 $(VENV_DIR)/bin/activate : $(AUTOTEST_DIR)/requirements.txt
 	python3 -m venv $(VENV_DIR)
@@ -58,5 +58,4 @@ clean:
 	$(CURDIR)/qrun.log \
 	$(CURDIR)/modelsim.ini \
 	$(CURDIR)/transcript
-	@make -f $(QUARTUS_MAKEFILE) clean_releases
 
