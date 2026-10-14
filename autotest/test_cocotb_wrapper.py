@@ -36,8 +36,8 @@ def test_cocotb(cocotb_test_dir) -> None:
 
     runner.build(
         hdl_library='work',
-        build_args=['-mfcu'] + VERILOG_SOURCES + BUILD_ARGS,
-        sources=[VERILOG_SOURCES[0]],
+        build_args=BUILD_ARGS,
+        sources=VERILOG_SOURCES,
         includes=INCLUDE_DIRS,
         hdl_toplevel=hdl_toplevel,
         build_dir=BUILD_DIR,
