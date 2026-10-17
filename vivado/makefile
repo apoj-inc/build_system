@@ -44,7 +44,7 @@ $(PROJECT_DIR)/$(TOPLEVEL).runs/impl_1/$(TOPLEVEL).bit: $(VERILOG_SOURCES) $(SDC
 program: $(PROJECT_DIR)/$(TOPLEVEL).runs/impl_1/$(TOPLEVEL).bit
 	cp $(BS_PATH)/program_device.tcl $(PROJECT_DIR)/program_device.tcl
 
-	grep -qxF "set DEVICE_NUMBER $(DEVICE_NUMBER)" $(VARS_TCL) || echo set DEVICE_NUMBER $(DEVICE_NUMBER) >> $(VARS_TCL)
+	echo set DEVICE_NUMBER $(DEVICE_NUMBER) >> $(VARS_TCL)
 
 	@cd $(PROJECT_DIR);\
 	vivado -mode tcl -source program_device.tcl
