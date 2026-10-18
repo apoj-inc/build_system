@@ -27,15 +27,20 @@ set FILES_XCI_LIST [split $file_data "\n"]
 
 create_project -force $TOPLEVEL -part $DEVICE
 
+set_property verilog_define {XILINX} [get_filesets sources_1]
+
 set_property top $TOPLEVEL [get_filesets sources_1]
 
 foreach rtl $FILES_RTL_LIST {
     add_files -fileset sources_1 $REPO_DIR/$rtl
 }
 
-foreach incdir $INCDIRS_LIST {
-    set_property include_dirs $REPO_DIR/$incdir [get_filesets sources_1]
+set INCDIR_STRING $REPO_DIR/[lindex $INCDIRS_LIST 0]
+foreach incdir [lrange $INCDIRS_LIST 1 end] {
+    set INCDIR_STRING "$INCDIR_STRING $REPO_DIR/$incdir"
 }
+set_property include_dirs $INCDIR_STRING [get_filesets sources_1]
+puts [get_property include_dirs [get_filesets sources_1]]
 
 foreach xdc $FILES_XDC_LIST {
     add_files -fileset constrs_1 $REPO_DIR/$xdc
