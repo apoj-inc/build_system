@@ -21,6 +21,12 @@ close $fp
 
 set FILES_SDC_LIST [split $file_data "\n"]
 
+set fp [open $FILES_ASSIGNMENTS_PATH r]
+set file_data [read $fp]
+close $fp
+
+set FILES_ASSIGNMENTS_LIST [split $file_data "\n"]
+
 set fp [open $NAMES_QSYS_PATH r]
 set file_data [read $fp]
 close $fp
@@ -38,8 +44,6 @@ set_global_assignment -name DEVICE $DEVICE_PART
 
 set_global_assignment -name IP_SEARCH_PATHS $CUSTOM_IP_PATH
 
-source $CUSTOM_ASSIGNMENTS
-
 foreach rtl $FILES_RTL_LIST {
     set_global_assignment -name SYSTEMVERILOG_FILE $CURDIR/$rtl
 }
@@ -50,6 +54,10 @@ foreach incdir $INCDIRS_LIST {
 
 foreach sdc $FILES_SDC_LIST {
     set_global_assignment -name SDC_FILE $CURDIR/$sdc
+}
+
+foreach assignments $FILES_ASSIGNMENTS_LIST {
+    source ${CURDIR}/${assignments}
 }
 
 foreach qsys $NAMES_QSYS_LIST {

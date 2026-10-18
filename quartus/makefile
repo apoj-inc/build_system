@@ -17,12 +17,11 @@ INCDIRS_PATH ?= $(LIST_DIR)/incdirs.lst
 NAMES_QSYS_PATH ?= $(LIST_DIR)/names_qsys.lst
 CUSTOM_IP_PATH ?= $(LIST_DIR)/ip_paths.lst
 
-FILES_SDC_PATH ?= $(CURDIR)/sdc/lists/files_sdc.lst
+FILES_ASSIGNMENTS_PATH ?= $(CURDIR)/fpga/quartus/constraints/lists/files_assign.lst
+FILES_SDC_PATH ?= $(CURDIR)/fpga/quartus/constraints/lists/files_sdc.lst
 
 NAMES_QSYS := $(foreach name,$(shell cat $(NAMES_QSYS_PATH) | tr '\n' ' '), $(VARS_TCL_PATH)/$(shell basename $(name)).qsys)
 CUSTOM_IP := $(shell cat $(NAMES_QSYS_PATH) | tr '\n' ',')
-
-CUSTOM_ASSIGNMENTS ?= custom_assignments.tcl
 
 RELEASE_DIR 	?= $(CURDIR)/release
 RELEASE_DIRS  	?= $(wildcard $(RELEASE_DIR)/*/) 
@@ -49,12 +48,9 @@ all: compile
 compile: $(VARS_TCL_PATH)/output_files/$(TOPLEVEL).sof
 
 $(VARS_TCL_PATH)/output_files/$(TOPLEVEL).sof: $(VERILOG_SOURCES) $(HEX_SOURCES) $(IP_SOURCES) $(NAMES_QSYS)
-	cp $(QUARTUS_BUILD_PATH)/$(CUSTOM_ASSIGNMENTS) $(VARS_TCL_PATH)/$(CUSTOM_ASSIGNMENTS)
 	cp $(QUARTUS_BUILD_PATH)/setup_sh.tcl $(VARS_TCL_PATH)/setup_sh.tcl
 
 	@echo set TOPLEVEL $(TOPLEVEL) > $(VARS_TCL)
-	
-	@echo set CUSTOM_ASSIGNMENTS $(CUSTOM_ASSIGNMENTS) >> $(VARS_TCL)
 	
 	@echo set CURDIR $(CURDIR) >> $(VARS_TCL)
 
@@ -63,6 +59,7 @@ $(VARS_TCL_PATH)/output_files/$(TOPLEVEL).sof: $(VERILOG_SOURCES) $(HEX_SOURCES)
 	@echo set FILES_RTL_PATH $(FILES_RTL_PATH) >> $(VARS_TCL)
 	@echo set INCDIRS_PATH $(INCDIRS_PATH) >> $(VARS_TCL)
 	
+	@echo set FILES_ASSIGNMENTS_PATH $(FILES_ASSIGNMENTS_PATH) >> $(VARS_TCL)
 	@echo set FILES_SDC_PATH $(FILES_SDC_PATH) >> $(VARS_TCL)
 	
 	@echo set NAMES_QSYS_PATH $(NAMES_QSYS_PATH) >> $(VARS_TCL)
