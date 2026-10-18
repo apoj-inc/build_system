@@ -13,7 +13,7 @@ VARS_TCL ?= $(PROJECT_DIR)/vars.tcl
 FILES_RTL_PATH ?= $(LIST_DIR)/files_rtl.lst
 INCDIRS_PATH ?= $(LIST_DIR)/incdirs.lst
 
-FILES_SDC_PATH ?= $(CURDIR)/sdc/lists/files_sdc.lst
+FILES_XDC_PATH ?= $(CURDIR)/fpga/vivado/constraints/lists/files_xdc.lst
 
 FILES_XCI_PATH ?= $(LIST_DIR)/files_xci.lst
 
@@ -21,12 +21,12 @@ DEVICE ?= xc7k325tffg676-2L
 DEVICE_NUMBER ?= 0
 
 VERILOG_SOURCES := $(shell cat $(FILES_RTL_PATH) | tr '\n' ' ')
-SDC_SOURCES := $(shell cat $(FILES_SDC_PATH) | tr '\n' ' ')
+XDC_SOURCES := $(shell cat $(FILES_XDC_PATH) | tr '\n' ' ')
 XCI_SOURCES := $(shell cat $(FILES_XCI_PATH) | tr '\n' ' ')
 
 compile: $(PROJECT_DIR)/$(TOPLEVEL).runs/impl_1/$(TOPLEVEL).bit
 
-$(PROJECT_DIR)/$(TOPLEVEL).runs/impl_1/$(TOPLEVEL).bit: $(VERILOG_SOURCES) $(SDC_SOURCES) $(XCI_SOURCES)
+$(PROJECT_DIR)/$(TOPLEVEL).runs/impl_1/$(TOPLEVEL).bit: $(VERILOG_SOURCES) $(XDC_SOURCES) $(XCI_SOURCES)
 	mkdir -p $(PROJECT_DIR)
 	cp $(BS_PATH)/setup_xpr.tcl $(PROJECT_DIR)/setup_xpr.tcl
 
@@ -34,7 +34,7 @@ $(PROJECT_DIR)/$(TOPLEVEL).runs/impl_1/$(TOPLEVEL).bit: $(VERILOG_SOURCES) $(SDC
 	@echo set REPO_DIR $(CURDIR) >> $(VARS_TCL)
 	@echo set FILES_RTL_PATH $(FILES_RTL_PATH) >> $(VARS_TCL)
 	@echo set INCDIRS_PATH $(INCDIRS_PATH) >> $(VARS_TCL)
-	@echo set FILES_SDC_PATH $(FILES_SDC_PATH) >> $(VARS_TCL)
+	@echo set FILES_XDC_PATH $(FILES_XDC_PATH) >> $(VARS_TCL)
 	@echo set FILES_XCI_PATH $(FILES_XCI_PATH) >> $(VARS_TCL)
 	@echo set DEVICE $(DEVICE) >> $(VARS_TCL)
 

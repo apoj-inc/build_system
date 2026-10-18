@@ -12,11 +12,11 @@ close $fp
 
 set INCDIRS_LIST [split $file_data "\n"]
 
-set fp [open $FILES_SDC_PATH r]
+set fp [open $FILES_XDC_PATH r]
 set file_data [read $fp]
 close $fp
 
-set FILES_SDC_LIST [split $file_data "\n"]
+set FILES_XDC_LIST [split $file_data "\n"]
 
 set fp [open $FILES_XCI_PATH r]
 set file_data [read $fp]
@@ -37,8 +37,8 @@ foreach incdir $INCDIRS_LIST {
     set_property include_dirs $REPO_DIR/$incdir [get_filesets sources_1]
 }
 
-foreach sdc $FILES_SDC_LIST {
-    add_files -fileset constrs_1 $REPO_DIR/$sdc
+foreach xdc $FILES_XDC_LIST {
+    add_files -fileset constrs_1 $REPO_DIR/$xdc
 }
 
 foreach xci $FILES_XCI_LIST {
