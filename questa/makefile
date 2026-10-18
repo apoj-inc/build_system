@@ -12,6 +12,8 @@ QUESTA_PATH ?= $(CURDIR)/build_system/questa
 QUESTA_BUILD_PATH ?= $(CURDIR)/.cache/questa
 TOPLEVEL ?= tb
 
+PLATFORM ?= QUARTUS
+
 SIM_PATH ?= $(QUESTA_BUILD_PATH)
 
 VARS_TCL_PATH := $(SIM_PATH)/vars.tcl
@@ -25,6 +27,7 @@ run:
 	@echo set LIST_INC $(LIST_INC) >> $(VARS_TCL_PATH)
 	@echo set TOPLEVEL $(TOPLEVEL) >> $(VARS_TCL_PATH)
 	@echo set SIM_PATH $(SIM_PATH) >> $(VARS_TCL_PATH)
+	@echo set PLATFORM $(PLATFORM) >> $(VARS_TCL_PATH)
 
 	cp $(QUESTA_PATH)/questa_script.tcl $(QUESTA_BUILD_PATH)/questa_script.tcl; \
 	cd $(CURDIR); \

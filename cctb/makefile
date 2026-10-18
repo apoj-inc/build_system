@@ -20,8 +20,9 @@ INCLUDE_DIRS ?= $(foreach file,$(shell cat $(INCDIRS_PATH) | grep -v "#"),$(CURD
 
 SIM ?= questa-compat
 
+PLATFORM ?= QUARTUS
 ifndef COMPILE_ARGS
-COMPILE_ARGS := -suppress 13314 -suppress 14408
+COMPILE_ARGS := -suppress 13314 -suppress 14408 +define+$(PLATFORM)
 endif
 
 ifndef SIM_ARGS

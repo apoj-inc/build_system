@@ -24,8 +24,9 @@ TESTS_DIR   ?= $(BUILD_DIR)/tests
 LOGS_DIR    ?= $(TESTS_DIR)/logs
 RESULTS_DIR ?= ${LOGS_DIR}/results
 
+PLATFORM ?= QUARTUS
 SIM ?= questa-qisqrun
-BUILD_ARGS ?= -suppress 13314 -suppress 14408
+BUILD_ARGS ?= -suppress 13314 -suppress 14408 +define+$(PLATFORM)
 SIM_ARGS ?= -suppress 12110 -autofindloop -suppress 12130
 
 ARGS ?=

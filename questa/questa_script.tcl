@@ -53,7 +53,7 @@ foreach rtl $FILES_TB_LIST {
 close $fp
 
 vlib work
-vlog -mfcu +incdir${INCDIRS_STRING} -f files_rtl.lst -suppress 13314
+vlog -mfcu +define+${PLATFORM} +incdir${INCDIRS_STRING} -f files_rtl.lst -suppress 13314
 
 vsim -voptargs=+acc work.$TOPLEVEL +define+QUESTA -sv_seed random
 if {[lsearch -exact $WildcardFilter Memory] >= 0} {
