@@ -36,8 +36,14 @@ set NAMES_QSYS_LIST [split $file_data "\n"]
 
 project_new $TOPLEVEL -overwrite
 
+set_global_assignment -name OCP_HW_EVAL DISABLE
+set_global_assignment -name VERILOG_MACRO "ALTERA"
+
+set_global_assignment -name MUX_RESTRUCTURE OFF
+set_global_assignment -name OPTIMIZATION_TECHNIQUE SPEED
+
 set_global_assignment -name TOP_LEVEL_ENTITY $TOPLEVEL
-set_global_assignment -name VERILOG_MACRO QUARTUS
+set_global_assignment -name VERILOG_MACRO ALTERA
 
 set_global_assignment -name FAMILY $DEVICE_FAMILY
 set_global_assignment -name DEVICE $DEVICE_PART

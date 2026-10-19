@@ -12,7 +12,7 @@ QUESTA_PATH ?= $(CURDIR)/build_system/questa
 QUESTA_BUILD_PATH ?= $(CURDIR)/.cache/questa
 TOPLEVEL ?= tb
 
-PLATFORM ?= QUARTUS
+PLATFORM ?= ALTERA
 
 SIM_PATH ?= $(QUESTA_BUILD_PATH)
 
