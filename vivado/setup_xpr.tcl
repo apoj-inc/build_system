@@ -12,17 +12,11 @@ close $fp
 
 set INCDIRS_LIST [split $file_data "\n"]
 
-set fp [open $FILES_XDC_PATH r]
+set fp [open $FILES_IP_PATH r]
 set file_data [read $fp]
 close $fp
 
-set FILES_XDC_LIST [split $file_data "\n"]
-
-set fp [open $FILES_XCI_PATH r]
-set file_data [read $fp]
-close $fp
-
-set FILES_XCI_LIST [split $file_data "\n"]
+set FILES_IP_LIST [split $file_data "\n"]
 
 
 create_project -force $TOPLEVEL -part $DEVICE
@@ -42,16 +36,16 @@ foreach incdir [lrange $INCDIRS_LIST 1 end] {
 set_property include_dirs $INCDIR_STRING [get_filesets sources_1]
 puts [get_property include_dirs [get_filesets sources_1]]
 
-foreach xdc $FILES_XDC_LIST {
-    add_files -fileset constrs_1 $REPO_DIR/$xdc
+add_files -fileset constrs_1 $REPO_DIR/${XDC_SOURCE}
+
+foreach ip $FILES_IP_LIST {
+    source $REPO_DIR/$ip
 }
 
-foreach xci $FILES_XCI_LIST {
-    source $REPO_DIR/$xci
+foreach ip [get_ips *] {
+    create_ip_run [get_ips ${ip}]
+    launch_runs ${ip}_synth_1
 }
-
-create_ip_run [get_ips pcie_7x_0]
-launch_runs pcie_7x_0_synth_1
 launch_runs synth_1
 wait_on_run synth_1
 
