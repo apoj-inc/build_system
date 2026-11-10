@@ -13,14 +13,14 @@ VARS_TCL ?= $(PROJECT_DIR)/vars.tcl
 FILES_RTL_PATH ?= $(LIST_DIR)/files_rtl.lst
 INCDIRS_PATH ?= $(LIST_DIR)/incdirs.lst
 
-FILES_XCI_PATH ?= $(LIST_DIR)/files_xci.lst
+FILES_IP_PATH ?= $(LIST_DIR)/files_ip.lst
 
 DEVICE ?= xc7k325tffg676-2L
 DEVICE_NUMBER ?= 0
 
 VERILOG_SOURCES := $(shell cat $(FILES_RTL_PATH) | tr '\n' ' ')
 XDC_SOURCE ?= fpga/vivado/constraints/$(TOPLEVEL).xdc
-XCI_SOURCES := $(shell cat $(FILES_XCI_PATH) | tr '\n' ' ')
+XCI_SOURCES := $(shell cat $(FILES_IP_PATH) | tr '\n' ' ')
 
 compile: $(PROJECT_DIR)/$(TOPLEVEL).runs/impl_1/$(TOPLEVEL).bit
 
@@ -33,7 +33,7 @@ $(PROJECT_DIR)/$(TOPLEVEL).runs/impl_1/$(TOPLEVEL).bit: $(VERILOG_SOURCES) $(XDC
 	@echo set FILES_RTL_PATH $(FILES_RTL_PATH) >> $(VARS_TCL)
 	@echo set INCDIRS_PATH $(INCDIRS_PATH) >> $(VARS_TCL)
 	@echo set XDC_SOURCE $(XDC_SOURCE) >> $(VARS_TCL)
-	@echo set FILES_XCI_PATH $(FILES_XCI_PATH) >> $(VARS_TCL)
+	@echo set FILES_IP_PATH $(FILES_IP_PATH) >> $(VARS_TCL)
 	@echo set DEVICE $(DEVICE) >> $(VARS_TCL)
 
 	@cd $(PROJECT_DIR);\
