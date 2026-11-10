@@ -9,23 +9,13 @@ close $fp
 
 set FILES_RTL_LIST [split $file_data "\n"]
 
+
 set fp [open $INCDIRS_PATH r]
 set file_data [read $fp]
 close $fp
 
 set INCDIRS_LIST [split $file_data "\n"]
 
-set fp [open $FILES_SDC_PATH r]
-set file_data [read $fp]
-close $fp
-
-set FILES_SDC_LIST [split $file_data "\n"]
-
-set fp [open $FILES_ASSIGNMENTS_PATH r]
-set file_data [read $fp]
-close $fp
-
-set FILES_ASSIGNMENTS_LIST [split $file_data "\n"]
 
 set fp [open $NAMES_QSYS_PATH r]
 set file_data [read $fp]
@@ -58,13 +48,8 @@ foreach incdir $INCDIRS_LIST {
     set_global_assignment -name SEARCH_PATH $CURDIR/$incdir
 }
 
-foreach sdc $FILES_SDC_LIST {
-    set_global_assignment -name SDC_FILE $CURDIR/$sdc
-}
-
-foreach assignments $FILES_ASSIGNMENTS_LIST {
-    source ${CURDIR}/${assignments}
-}
+source ${ASSIGNMENTS_SOURCE}
+set_global_assignment -name SDC_FILE ${SDC_SOURCE}
 
 foreach qsys $NAMES_QSYS_LIST {
     set qip_name [file tail $qsys]
